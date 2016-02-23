@@ -1,12 +1,12 @@
 FROM gliderlabs/alpine:3.3
 MAINTAINER Justin Plock <justin@plock.net>
 
-LABEL name="zookeeper" version="3.4.6"
+LABEL name="zookeeper" version="3.4.8"
 
-RUN apk-install openjdk7-jre wget bash 
+RUN apk-install openjdk7-jre wget bash
 RUN mkdir /opt \
-    && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
-    && mv /opt/zookeeper-3.4.6 /opt/zookeeper \
+    && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz | tar -xzf - -C /opt \
+    && mv /opt/zookeeper-3.4.8 /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
 
