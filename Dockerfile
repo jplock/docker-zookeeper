@@ -17,6 +17,10 @@ EXPOSE 2181 2888 3888
 
 WORKDIR /opt/zookeeper
 
+# Only checks if server is up and listening, not quorum. 
+# See https://zookeeper.apache.org/doc/r3.4.10/zookeeperAdmin.html#sc_zkCommands
+HEALTHCHECK CMD [ $(echo ruok | nc 127.0.0.1:2181) == "imok" ] || exit 1
+
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
 ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
