@@ -2,7 +2,7 @@ FROM openjdk:8-jre-alpine
 MAINTAINER Justin Plock <jplock@smoketurner.com>
 
 ARG MIRROR=http://apache.mirrors.pair.com
-ARG VERSION=3.4.11
+ARG VERSION=3.4.13
 
 LABEL name="zookeeper" version=$VERSION
 
@@ -18,7 +18,7 @@ EXPOSE 2181 2888 3888
 WORKDIR /opt/zookeeper
 
 # Only checks if server is up and listening, not quorum. 
-# See https://zookeeper.apache.org/doc/r3.4.10/zookeeperAdmin.html#sc_zkCommands
+# See https://zookeeper.apache.org/doc/r3.4.13/zookeeperAdmin.html#sc_zkCommands
 HEALTHCHECK CMD [ $(echo ruok | nc 127.0.0.1:2181) == "imok" ] || exit 1
 
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
