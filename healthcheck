@@ -1,0 +1,11 @@
+#!/bin/bash
+# Read bound host and port from the config file (if any)
+set -e
+
+CFG=/opt/zookeeper/conf/zoo.cfg
+if [ -e "$CFG" ]; then
+    H="$(awk -F= '/^clientPortAddress=/{ print $2 }' "$CFG")"
+    P="$(awk -F= '/^clientPort=/{ print $2 }' "$CFG")"
+fi
+
+[ "$(echo ruok | nc "${H:-127.0.0.1}" "${P:-2181}")" == "imok" ] || exit 1
