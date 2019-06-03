@@ -12,6 +12,10 @@ RUN apk add --no-cache wget bash \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
 
+# Enable additional four-letter word commands
+# see https://zookeeper.apache.org/doc/r3.5.5/zookeeperAdmin.html#sc_clusterOptions
+RUN echo "4lw.commands.whitelist=*" >> /opt/zookeeper/conf/zoo.cfg
+
 EXPOSE 2181 2888 3888
 
 WORKDIR /opt/zookeeper
