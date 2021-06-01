@@ -5,8 +5,8 @@ FROM debian:jessie
 MAINTAINER Justin Plock <justin@plock.net>
 
 RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
-RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
-    && mv /opt/zookeeper-3.4.6 /opt/zookeeper \
+RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz | tar -xzf - -C /opt \
+    && mv /opt/zookeeper-3.4.14 /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
 
@@ -25,5 +25,7 @@ WORKDIR /opt/zookeeper
 
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
-ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
+COPY docker-entrypoint.sh /opt/zookeeper/
+
+ENTRYPOINT ["/opt/zookeeper/docker-entrypoint.sh"]
 CMD ["start-foreground"]

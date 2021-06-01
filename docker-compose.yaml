@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  zoo1:
+    build: ./
+    environment:
+      SERVER_ID: "1"
+      SERVERS: "server.1=0.0.0.0:2888:3888,server.2=zoo2:2888:3888,server.3=zoo3:2888:3888"
+    hostname: zoo1
+    image: zookeeper
+    ports:
+      - "2181:2181"
+
+  zoo2:
+    build: ./
+    environment:
+      SERVER_ID: "2"
+      SERVERS: "server.1=zoo1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=zoo3:2888:3888"
+    hostname: zoo2
+    image: zookeeper
+    ports:
+      - "2182:2181"
+
+  zoo3:
+    build: ./
+    environment:
+      SERVER_ID: "3"
+      SERVERS: "server.1=zoo1:2888:3888,server.2=zoo2:2888:3888,server.3=0.0.0.0:2888:3888"
+    hostname: zoo3
+    image: zookeeper
+    ports:
+      - "2183:2181"
