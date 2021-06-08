@@ -22,7 +22,8 @@ WORKDIR /opt/zookeeper
 
 # Only checks if server is up and listening, not quorum. 
 # See https://zookeeper.apache.org/doc/r3.5.5/zookeeperAdmin.html#sc_zkCommands
-HEALTHCHECK CMD [ $(echo ruok | nc 127.0.0.1:2181) == "imok" ] || exit 1
+COPY healthcheck /healthcheck
+HEALTHCHECK CMD /healthcheck
 
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
