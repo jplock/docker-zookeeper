@@ -10,7 +10,7 @@ RUN wget -q -O - https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apach
     && mkdir -p /tmp/zookeeper
 
 # Make ZooKeeper clean up files regularly
-RUN sed -i 's/#autopurge.snapRetainCount=3/autopurge.snapRetainCount=100/' /opt/zookeeper/conf/zoo.cfg \
+RUN sed -i 's/#autopurge.snapRetainCount=3/autopurge.snapRetainCount=5/' /opt/zookeeper/conf/zoo.cfg \
     && sed -i 's/#autopurge.purgeInterval=1/autopurge.purgeInterval=1/' /opt/zookeeper/conf/zoo.cfg 
 
 # Increase the tick time so we can increase the session timeout to 5 minutes
