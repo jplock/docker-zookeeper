@@ -5,12 +5,9 @@ Custom docker image for Zookeeper.
 To build and publish use `publish.sh`
 
 ```
-docker build -t etleap/zookeeper:3.5.5 .
-```
+# login to ECR
+aws ecr get-login-password | docker login --username AWS --password-stdin 841591717599.dkr.ecr.us-east-1.amazonaws.com
 
-Push image to ECR
-
-```
-docker tag etleap/zookeeper:3.5.5 841591717599.dkr.ecr.us-east-1.amazonaws.com/zookeeper:3.5.5
-docker push 841591717599.dkr.ecr.us-east-1.amazonaws.com/zookeeper:3.5.5
+# update publish.sh zookeeper version ZOOKEEPER_VERSION
+sh publish.sh
 ```

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-ZOOKEEPER_VERSION=3.5.5
+source .env
+
+echo "Building etleap/zookeeper ${ZOOKEEPER_VERSION}"
 
 docker build -t etleap/zookeeper:${ZOOKEEPER_VERSION} .
 

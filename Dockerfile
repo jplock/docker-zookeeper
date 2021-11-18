@@ -2,10 +2,11 @@
 # VERSION        0.5
 
 FROM debian:9.13
+ENV ZOOKEEPER_VERSION=3.5.9
 
 RUN apt-get update && apt-get install -y openjdk-8-jre-headless wget
-RUN wget -q -O - https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz | tar -xzf - -C /opt \
-    && mv /opt/apache-zookeeper-3.5.5-bin /opt/zookeeper \
+RUN wget -q -O - https://archive.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz | tar -xzf - -C /opt \
+    && mv /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /tmp/zookeeper
 
