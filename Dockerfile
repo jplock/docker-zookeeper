@@ -17,6 +17,9 @@ RUN sed -i 's/#autopurge.snapRetainCount=3/autopurge.snapRetainCount=5/' /opt/zo
 # Increase the tick time so we can increase the session timeout to 5 minutes
 RUN sed -i 's/tickTime=2000/tickTime=15000/' /opt/zookeeper/conf/zoo.cfg
 
+# Update the initLimit from 10 (default) to 100
+RUN sed -i 's/initLimit=10/initLimit=100/' /opt/zookeeper/conf/zoo.cfg
+
 # Whitelist this commands
 RUN echo "4lw.commands.whitelist=stat, ruok, conf, isro" >> /opt/zookeeper/conf/zoo.cfg
 
