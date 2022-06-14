@@ -17,6 +17,12 @@ RUN sed -i 's/#autopurge.snapRetainCount=3/autopurge.snapRetainCount=5/' /opt/zo
 # Increase the tick time so we can increase the session timeout to 5 minutes
 RUN sed -i 's/tickTime=2000/tickTime=15000/' /opt/zookeeper/conf/zoo.cfg
 
+# ZK cluster shutdown unexpectedly and without a clear reason 
+# To try and fix this update the initLimit from 10 (default) to 100
+# increasing initLimit to a value that allows the snapshot transfer to complete fixed this problem
+# see: https://www.pivotaltracker.com/story/show/182252378/comments/231697522
+RUN sed -i 's/initLimit=10/initLimit=100/' /opt/zookeeper/conf/zoo.cfg
+
 # Whitelist this commands
 RUN echo "4lw.commands.whitelist=stat, ruok, conf, isro" >> /opt/zookeeper/conf/zoo.cfg
 
