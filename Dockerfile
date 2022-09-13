@@ -2,9 +2,13 @@
 # VERSION        0.5
 
 FROM debian:9.13
-ENV ZOOKEEPER_VERSION=3.5.9
 
 RUN apt-get update && apt-get install -y openjdk-8-jre-headless wget
+
+ARG ZOOKEEPER_VERSION
+ENV ZOOKEEPER_VERSION ${ZOOKEEPER_VERSION}
+RUN echo "Building etleap/zookeeper ${ZOOKEEPER_VERSION}"
+
 RUN wget -q -O - https://archive.apache.org/dist/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz | tar -xzf - -C /opt \
     && mv /opt/apache-zookeeper-${ZOOKEEPER_VERSION}-bin /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
